@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+int main() {
+    int n, i;
+
+    // Input number of students
+    printf("Enter number of students: ");
+    scanf("%d", &n);
+
+    // Print attendance numbers
+    printf("Attendance numbers are:\n");
+    for (i = 1; i <= n; i++) {
+        printf("%d\n", i);
+    }
+
+    return 0;
+}
