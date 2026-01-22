@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main() {
+    float income, expenses, savings;
+
+    // Input monthly income and expenses
+    printf("Enter monthly income: ");
+    scanf("%f", &income);
+
+    printf("Enter monthly expenses: ");
+    scanf("%f", &expenses);
+
+    // Calculate savings
+    savings = income - expenses;
+
+    // Display report
+    printf("\n--- Monthly Savings Report ---\n");
+    printf("Income   : %.2f\n", income);
+    printf("Expenses : %.2f\n", expenses);
+
+    if (savings > 0) {
+        printf("Savings  : %.2f (Good saving!)\n", savings);
+    } else if (savings == 0) {
+        printf("Savings  : 0.00 (No savings)\n");
+    } else {
+        printf("Loss     : %.2f (Expenses exceed income)\n", -savings);
+    }
+
+    return 0;
+}
