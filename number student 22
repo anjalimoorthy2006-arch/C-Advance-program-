@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main() {
+    int n, i;
+    int marks, total = 0;
+
+    // Input number of students
+    printf("Enter number of students: ");
+    scanf("%d", &n);
+
+    // Input marks and calculate total
+    for (i = 1; i <= n; i++) {
+        printf("Enter marks of student %d: ", i);
+        scanf("%d", &marks);
+        total = total + marks;
+    }
+
+    // Display total marks
+    printf("Total marks of %d students = %d", n, total);
+
+    return 0;
+}
