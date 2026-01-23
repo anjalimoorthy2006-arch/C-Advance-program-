@@ -1,0 +1,55 @@
+#include <stdio.h>
+#define PI 3.14159
+
+// Function to calculate area of rectangle
+float areaRectangle(float length, float width) {
+    return length * width;
+}
+
+// Function to calculate area of circle
+float areaCircle(float radius) {
+    return PI * radius * radius;
+}
+
+// Function to calculate area of triangle
+float areaTriangle(float base, float height) {
+    return 0.5 * base * height;
+}
+
+int main() {
+    int choice;
+    float l, w, r, b, h, area;
+
+    // Menu
+    printf("Area Calculation Menu:\n");
+    printf("1. Rectangle\n");
+    printf("2. Circle\n");
+    printf("3. Triangle\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            printf("Enter length and width of rectangle: ");
+            scanf("%f %f", &l, &w);
+            area = areaRectangle(l, w);
+            printf("Area of Rectangle = %.2f\n", area);
+            break;
+        case 2:
+            printf("Enter radius of circle: ");
+            scanf("%f", &r);
+            area = areaCircle(r);
+            printf("Area of Circle = %.2f\n", area);
+            break;
+        case 3:
+            printf("Enter base and height of triangle: ");
+            scanf("%f %f", &b, &h);
+            area = areaTriangle(b, h);
+            printf("Area of Triangle = %.2f\n", area);
+            break;
+        default:
+            printf("Invalid choice!\n");
+    }
+
+    return 0;
+}
