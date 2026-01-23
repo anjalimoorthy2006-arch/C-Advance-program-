@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define structure for Product
+struct Product {
+    int productID;
+    char name[50];
+    char category[30];
+    float price;
+    int quantity;
+};
+
+// Function to display product details
+void display(struct Product p) {
+    printf("\nProduct ID: %d\n", p.productID);
+    printf("Name: %s\n", p.name);
+    printf("Category: %s\n", p.category);
+    printf("Price: %.2f\n", p.price);
+    printf("Quantity: %d\n", p.quantity);
+}
+
+int main() {
+    int n, i;
+
+    // Input number of products
+    printf("Enter number of products: ");
+    scanf("%d", &n);
+
+    struct Product products[n];  // Array of structures
+
+    // Input details for each product
+    for(i = 0; i < n; i++) {
+        printf("\nEnter details for product %d:\n", i + 1);
+
+        printf("Product ID: ");
+        scanf("%d", &products[i].productID);
+
+        printf("Product Name: ");
+        getchar(); // Consume leftover newline
+        fgets(products[i].name, sizeof(products[i].name), stdin);
+        products[i].name[strcspn(products[i].name, "\n")] = 0; // Remove newline
+
+        printf("Category: ");
+        fgets(products[i].category, sizeof(products[i].category), stdin);
+        products[i].category[strcspn(products[i].category, "\n")] = 0; // Remove newline
+
+        printf("Price: ");
+        scanf("%f", &products[i].price);
+
+        printf("Quantity: ");
+        scanf("%d", &products[i].quantity);
+    }
+
+    // Display all product details
+    printf("\n----- Product Details -----\n");
+    for(i = 0; i < n; i++) {
+        display(products[i]);
+    }
+
+    return 0;
+}
