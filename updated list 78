@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define structure for a Record
+struct Record {
+    int id;
+    char name[50];
+};
+
+int main() {
+    int n, i, newRecords, total;
+
+    // Input initial number of records
+    printf("Enter the number of existing records: ");
+    scanf("%d", &n);
+
+    struct Record records[100]; // Maximum capacity = 100
+
+    // Input initial records
+    for(i = 0; i < n; i++) {
+        printf("\nEnter details for record %d:\n", i + 1);
+        printf("ID: ");
+        scanf("%d", &records[i].id);
+
+        getchar(); // Clear input buffer
+        printf("Name: ");
+        fgets(records[i].name, sizeof(records[i].name), stdin);
+        size_t len = strlen(records[i].name);
+        if(len > 0 && records[i].name[len - 1] == '\n') {
+            records[i].name[len - 1] = '\0';
+        }
+    }
+
+    // Input number of new records to add
+    printf("\nEnter number of new records to add: ");
+    scanf("%d", &newRecords);
+
+    total = n + newRecords;
+
+    // Add new records
+    for(i = n; i < total; i++) {
+        printf("\nEnter details for new record %d:\n", i + 1);
+        printf("ID: ");
+        scanf("%d", &records[i].id);
+
+        getchar(); // Clear input buffer
+        printf("Name: ");
+        fgets(records[i].name, sizeof(records[i].name), stdin);
+        size_t len = strlen(records[i].name);
+        if(len > 0 && records[i].name[len - 1] == '\n') {
+            records[i].name[len - 1] = '\0';
+        }
+    }
+
+    // Display all records
+    printf("\n===== Updated Records =====\n");
+    for(i = 0; i < total; i++) {
+        printf("Record %d - ID: %d, Name: %s\n", i + 1, records[i].id, records[i].name);
+    }
+
+    printf("\nTotal records now: %d\n", total);
+
+    return 0;
+}
