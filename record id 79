@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define a structure for a Record
+struct Record {
+    int id;
+    char name[50];
+};
+
+int main() {
+    int n, i, searchId;
+    
+    // Input number of records
+    printf("Enter the number of records: ");
+    scanf("%d", &n);
+
+    struct Record records[n];  // Array of structures
+
+    // Input details of each record
+    for(i = 0; i < n; i++) {
+        printf("\nEnter details for record %d:\n", i + 1);
+        printf("ID: ");
+        scanf("%d", &records[i].id);
+
+        getchar(); // Clear input buffer
+        printf("Name: ");
+        fgets(records[i].name, sizeof(records[i].name), stdin);
+
+        // Remove newline character from fgets
+        size_t len = strlen(records[i].name);
+        if(len > 0 && records[i].name[len - 1] == '\n') {
+            records[i].name[len - 1] = '\0';
+        }
+    }
+
+    // Search for a record by ID
+    printf("\nEnter the ID to search: ");
+    scanf("%d", &searchId);
+
+    int found = 0; // Flag to check if record is found
+
+    for(i = 0; i < n; i++) {
+        if(records[i].id == searchId) {
+            printf("\nRecord found:\n");
+            printf("ID: %d\n", records[i].id);
+            printf("Name: %s\n", records[i].name);
+            found = 1;
+            break;  // Stop searching once found
+        }
+    }
+
+    if(!found) {
+        printf("\nRecord with ID %d not found.\n", searchId);
+    }
+
+    return 0;
+}
