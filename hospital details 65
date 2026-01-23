@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define structure for Patient
+struct Patient {
+    int patientID;
+    char name[50];
+    int age;
+    char gender[10];
+    char disease[50];
+};
+
+int main() {
+    int n, i;
+
+    // Ask user for number of patients
+    printf("Enter number of patients: ");
+    scanf("%d", &n);
+
+    struct Patient patients[n];  // Array of structures
+
+    // Input details for each patient
+    for(i = 0; i < n; i++) {
+        printf("\nEnter details for patient %d:\n", i + 1);
+
+        printf("Patient ID: ");
+        scanf("%d", &patients[i].patientID);
+
+        printf("Name: ");
+        getchar(); // Consume leftover newline
+        fgets(patients[i].name, sizeof(patients[i].name), stdin);
+        patients[i].name[strcspn(patients[i].name, "\n")] = 0; // Remove newline
+
+        printf("Age: ");
+        scanf("%d", &patients[i].age);
+
+        printf("Gender: ");
+        getchar(); // Consume leftover newline
+        fgets(patients[i].gender, sizeof(patients[i].gender), stdin);
+        patients[i].gender[strcspn(patients[i].gender, "\n")] = 0; // Remove newline
+
+        printf("Disease: ");
+        fgets(patients[i].disease, sizeof(patients[i].disease), stdin);
+        patients[i].disease[strcspn(patients[i].disease, "\n")] = 0; // Remove newline
+    }
+
+    // Display all patient details
+    printf("\n----- Hospital Patient Details -----\n");
+    for(i = 0; i < n; i++) {
+        printf("\nPatient %d\n", i + 1);
+        printf("Patient ID: %d\n", patients[i].patientID);
+        printf("Name: %s\n", patients[i].name);
+        printf("Age: %d\n", patients[i].age);
+        printf("Gender: %s\n", patients[i].gender);
+        printf("Disease: %s\n", patients[i].disease);
+    }
+
+    return 0;
+}
