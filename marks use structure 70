@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define structure for Student
+struct Student {
+    int rollNo;
+    char name[50];
+    int marks[5]; // Assuming 5 subjects
+    int totalMarks;
+};
+
+int main() {
+    int n, i, j;
+    int numSubjects = 5;
+
+    printf("Enter number of students: ");
+    scanf("%d", &n);
+
+    struct Student students[n];
+
+    // Input student details
+    for(i = 0; i < n; i++) {
+        printf("\nEnter details for student %d:\n", i + 1);
+
+        printf("Roll Number: ");
+        scanf("%d", &students[i].rollNo);
+
+        printf("Name: ");
+        getchar(); // Consume leftover newline
+        fgets(students[i].name, sizeof(students[i].name), stdin);
+        students[i].name[strcspn(students[i].name, "\n")] = 0; // Remove newline
+
+        students[i].totalMarks = 0;
+
+        // Input marks for each subject
+        for(j = 0; j < numSubjects; j++) {
+            printf("Enter marks for subject %d: ", j + 1);
+            scanf("%d", &students[i].marks[j]);
+            students[i].totalMarks += students[i].marks[j]; // Calculate total
+        }
+    }
+
+    // Display student details and total marks
+    printf("\n----- Student Total Marks -----\n");
+    for(i = 0; i < n; i++) {
+        printf("\nStudent Roll No: %d\n", students[i].rollNo);
+        printf("Name: %s\n", students[i].name);
+        printf("Marks: ");
+        for(j = 0; j < numSubjects; j++) {
+            printf("%d ", students[i].marks[j]);
+        }
+        printf("\nTotal Marks: %d\n", students[i].totalMarks);
+    }
+
+    return 0;
+}
