@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define structure for a Record
+struct Record {
+    int id;
+    char name[50];
+};
+
+int main() {
+    int n, i, searchId;
+    
+    // Input number of records
+    printf("Enter the number of records: ");
+    scanf("%d", &n);
+
+    struct Record records[n];
+
+    // Input details for each record
+    for(i = 0; i < n; i++) {
+        printf("\nEnter details for record %d:\n", i + 1);
+        printf("ID: ");
+        scanf("%d", &records[i].id);
+
+        getchar(); // Clear input buffer
+        printf("Name: ");
+        fgets(records[i].name, sizeof(records[i].name), stdin);
+
+        // Remove newline character from fgets
+        size_t len = strlen(records[i].name);
+        if(len > 0 && records[i].name[len - 1] == '\n') {
+            records[i].name[len - 1] = '\0';
+        }
+    }
+
+    // Ask user for ID to update
+    printf("\nEnter the ID of the record to update: ");
+    scanf("%d", &searchId);
+
+    int found = 0;
+
+    for(i = 0; i < n; i++) {
+        if(records[i].id == searchId) {
+            found = 1;
+            getchar(); // Clear input buffer
+            printf("Enter new name for record with ID %d: ", searchId);
+            fgets(records[i].name, sizeof(records[i].name), stdin);
+
+            // Remove newline character from fgets
+            size_t len = strlen(records[i].name);
+            if(len > 0 && records[i].name[len - 1] == '\n') {
+                records[i].name[len - 1] = '\0';
+            }
+
+            printf("\nRecord updated successfully!\n");
+            printf("Updated Record:\n");
+            printf("ID: %d\n", records[i].id);
+            printf("Name: %s\n", records[i].name);
+            break;
+        }
+    }
+
+    if(!found) {
+        printf("\nRecord with ID %d not found.\n", searchId);
+    }
+
+    return 0;
+}
