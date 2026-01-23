@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+int main() {
+    int n, i;
+
+    // Input the size of the array
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr1[n], arr2[n];  // Declare two arrays
+
+    // Input elements for the first array
+    printf("Enter elements of the first array:\n");
+    for(i = 0; i < n; i++) {
+        scanf("%d", &arr1[i]);
+    }
+
+    // Copy elements from arr1 to arr2
+    for(i = 0; i < n; i++) {
+        arr2[i] = arr1[i];
+    }
+
+    // Display both arrays
+    printf("\nFirst array: ");
+    for(i = 0; i < n; i++) {
+        printf("%d ", arr1[i]);
+    }
+
+    printf("\nSecond array (copied): ");
+    for(i = 0; i < n; i++) {
+        printf("%d ", arr2[i]);
+    }
+
+    printf("\n");
+
+    return 0;
+}
