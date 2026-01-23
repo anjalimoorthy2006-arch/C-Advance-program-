@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define structure for Bus Ticket
+struct BusTicket {
+    int ticketID;
+    char passengerName[50];
+    char source[50];
+    char destination[50];
+    char travelDate[20];
+    float price;
+};
+
+// Function to display bus ticket details
+void display(struct BusTicket t) {
+    printf("\nTicket ID: %d\n", t.ticketID);
+    printf("Passenger Name: %s\n", t.passengerName);
+    printf("Source: %s\n", t.source);
+    printf("Destination: %s\n", t.destination);
+    printf("Travel Date: %s\n", t.travelDate);
+    printf("Price: %.2f\n", t.price);
+}
+
+int main() {
+    int n, i;
+
+    // Input number of tickets
+    printf("Enter number of bus tickets: ");
+    scanf("%d", &n);
+
+    struct BusTicket tickets[n]; // Array of structures
+
+    // Input details for each ticket
+    for(i = 0; i < n; i++) {
+        printf("\nEnter details for ticket %d:\n", i + 1);
+
+        printf("Ticket ID: ");
+        scanf("%d", &tickets[i].ticketID);
+
+        printf("Passenger Name: ");
+        getchar(); // Consume leftover newline
+        fgets(tickets[i].passengerName, sizeof(tickets[i].passengerName), stdin);
+        tickets[i].passengerName[strcspn(tickets[i].passengerName, "\n")] = 0; // Remove newline
+
+        printf("Source: ");
+        fgets(tickets[i].source, sizeof(tickets[i].source), stdin);
+        tickets[i].source[strcspn(tickets[i].source, "\n")] = 0; // Remove newline
+
+        printf("Destination: ");
+        fgets(tickets[i].destination, sizeof(tickets[i].destination), stdin);
+        tickets[i].destination[strcspn(tickets[i].destination, "\n")] = 0; // Remove newline
+
+        printf("Travel Date (DD/MM/YYYY): ");
+        fgets(tickets[i].travelDate, sizeof(tickets[i].travelDate), stdin);
+        tickets[i].travelDate[strcspn(tickets[i].travelDate, "\n")] = 0; // Remove newline
+
+        printf("Price: ");
+        scanf("%f", &tickets[i].price);
+    }
+
+    // Display all ticket details
+    printf("\n----- Bus Ticket Details -----\n");
+    for(i = 0; i < n; i++) {
+        display(tickets[i]);
+    }
+
+    return 0;
+}
