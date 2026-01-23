@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define a structure for Customer
+struct Customer {
+    int id;
+    char name[50];
+    char mobile[15];
+};
+
+int main() {
+    int n, i, searchId;
+    
+    // Input number of customers
+    printf("Enter the number of customers: ");
+    scanf("%d", &n);
+    
+    struct Customer customers[n];  // Array of structures
+
+    // Input details of each customer
+    for(i = 0; i < n; i++) {
+        printf("\nEnter details for customer %d:\n", i + 1);
+
+        printf("Customer ID: ");
+        scanf("%d", &customers[i].id);
+
+        getchar(); // Clear input buffer before reading string
+
+        printf("Customer Name: ");
+        fgets(customers[i].name, sizeof(customers[i].name), stdin);
+        // Remove newline character from fgets
+        size_t len = strlen(customers[i].name);
+        if(len > 0 && customers[i].name[len - 1] == '\n') {
+            customers[i].name[len - 1] = '\0';
+        }
+
+        printf("Mobile Number: ");
+        fgets(customers[i].mobile, sizeof(customers[i].mobile), stdin);
+        // Remove newline character from fgets
+        len = strlen(customers[i].mobile);
+        if(len > 0 && customers[i].mobile[len - 1] == '\n') {
+            customers[i].mobile[len - 1] = '\0';
+        }
+    }
+
+    // Search for a customer by ID
+    printf("\nEnter Customer ID to search: ");
+    scanf("%d", &searchId);
+
+    int found = 0;
+    for(i = 0; i < n; i++) {
+        if(customers[i].id == searchId) {
+            printf("\nCustomer found:\n");
+            printf("ID: %d\n", customers[i].id);
+            printf("Name: %s\n", customers[i].name);
+            printf("Mobile Number: %s\n", customers[i].mobile);
+            found = 1;
+            break;
+        }
+    }
+
+    if(!found) {
+        printf("\nCustomer with ID %d not found.\n", searchId);
+    }
+
+    return 0;
+}
